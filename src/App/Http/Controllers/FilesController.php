@@ -19,7 +19,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $files = File::get();
+        $files = File::paginate(10);
 
         return view('Yk\LaravelFiles::files.index', compact('files'));
     }

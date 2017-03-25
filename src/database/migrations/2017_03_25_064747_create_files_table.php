@@ -45,12 +45,12 @@ class CreateFilesTable extends Migration
                 $table->string('mime_type', 191)->nullable();
             }
 
-            if ( ! Schema::hasColumn($table->getTable(), 'updated_at') ) {
-                $table->timestamp('updated_at');
-            }
-
             if ( ! Schema::hasColumn($table->getTable(), 'created_at') ) {
                 $table->dateTime('created_at');
+            }
+
+            if ( ! Schema::hasColumn($table->getTable(), 'updated_at') ) {
+                $table->timestamp('updated_at');
             }
 
             if ( ! Schema::hasColumn($table->getTable(), 'deleted_at') ) {
