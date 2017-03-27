@@ -12,8 +12,6 @@
 				@if (in_array($file->extension, ['jpg', 'jpeg', 'png', 'gif']))
 					<img src="{{ route('files.show', ['id' => $file->id, 'slug' => str_slug($file->name).'.'.$file->extension]) }}" class="img-thumbnail img-responsive" style="width: 100px;">
 				@endif
-
-				{{ $file->real_path }}
 			</td>
 			<td>
 				{{ $file->name }}.{{ $file->extension }}
