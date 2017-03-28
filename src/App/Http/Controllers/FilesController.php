@@ -19,7 +19,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        $files = File::paginate(10);
+        $files = File::orderBy('id', 'desc')->paginate(10);
 
         return view('Yk\LaravelFiles::files.index', compact('files'));
     }
@@ -43,18 +43,25 @@ class FilesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'files' => 'required|array|min:1',
+            'file' => 'required_without:files|file',
+            'files' => 'required_without:file|array|min:1',
         ]);
 
         if ($validator->fails()) {
+
             if($request->ajax())
             {
+
                 return Response::json($validator->messages(), 400);
+
             }else{
+
                 return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
+
             }
+
         }
 
         if ($request->hasFile('files')) {
@@ -77,6 +84,28 @@ class FilesController extends Controller
                 }
 
             }
+
+        }
+
+        if ($request->hasFile('file')) {
+
+            $file = $request->file('file');
+
+            if ($file->isValid()) {
+                
+                $record = new File;
+                $record->disk = 'local';
+                $record->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $record->extension = $file->extension();
+                $record->size = $file->getSize();
+                $record->mime_type = $file->getMimeType();
+
+                $record->save();
+
+                $file->storeAs($record->path,  $record->id.'.'.$file->extension(), 'local');
+
+            }
+
         }
 
         return redirect(route('files.index'));
