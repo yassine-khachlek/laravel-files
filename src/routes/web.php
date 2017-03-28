@@ -18,5 +18,6 @@ Route::group(['prefix' => 'files', 'as' => 'files.'], function () {
 	]]);
 
 	Route::get('/{id}/{slug?}', 'FilesController@show')->name('show');
+	Route::get('/{id}/download/{slug?}', 'FilesController@download')->name('download');
 
 });

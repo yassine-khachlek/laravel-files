@@ -92,7 +92,7 @@ class FilesController extends Controller
     {
         $file = File::findOrFail($id);
 
-        return Storage::disk('local')->get($file->path.'/'.$file->id.'.'.$file->extension);
+        return Response::make(Storage::disk('local')->get($file->path.'/'.$file->id.'.'.$file->extension), 200)->header('Content-Type', $file->mime_type);
     }
 
     /**
@@ -116,6 +116,24 @@ class FilesController extends Controller
     public function update(Request $request)
     {
 		//
+    }
+
+    /**
+     * Download the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id)
+    {
+        $file = File::findOrFail($id);
+
+        return Response::make(Storage::disk('local')->get($file->path.'/'.$file->id.'.'.$file->extension), 200)
+            ->header('Content-Type', 'application/octet-stream')
+            ->header('Content-Transfer-Encoding', 'binary')
+            ->header('Expires', '0')
+            ->header('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
+            ->header('Pragma', 'public');
     }
 
     /**

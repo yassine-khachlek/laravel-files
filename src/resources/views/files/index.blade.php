@@ -29,6 +29,15 @@
 			<td>
 				{{ round($file->size / pow(10, 6), 2) }} MB
 			</td>
+			<td>
+				<a href="{{ $file->link }}" target="_blank" class="btn btn-lg btn-primary pull-right">
+					<i class="fa fa-external-link" aria-hidden="true"></i>
+				</a>
+
+				<a href="{{ $file->downloadLink }}" class="btn btn-lg btn-primary pull-right">
+					<i class="fa fa-download" aria-hidden="true"></i>
+				</a>
+			</td>
 		</tr>
 	@endforeach
 	</body>
@@ -41,4 +50,10 @@
 
 @section('styles')
 <link href="{{ asset('/vendor/yk/laravel-files/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+
+<style type="text/css">
+	.table :last-child > a {
+		margin-left: 8px;
+	}
+</style>
 @append

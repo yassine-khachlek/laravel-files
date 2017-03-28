@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-	protected $appends = ['path', 'url'];
+	protected $appends = ['path', 'link', 'download_link'];
 
     public function getPathAttribute()
     {
@@ -19,8 +19,13 @@ class File extends Model
         return $path;
     }
 
-    public function getUrlAttribute()
+    public function getLinkAttribute()
     {
-        return route('files.show', $this->id);
+        return route('files.show', ['id' => $this->id, 'slug' => str_slug($this->name).'.'.$this->extension]);
+    }
+
+    public function getDownloadLinkAttribute()
+    {
+        return route('files.download', ['id' => $this->id, 'slug' => str_slug($this->name).'.'.$this->extension]);
     }
 }
