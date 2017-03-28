@@ -59,12 +59,12 @@ class FilesController extends Controller
 
         if ($request->hasFile('files')) {
             
-            foreach($request->file('files') as $file){
+            foreach ($request->file('files') as $file) {
+
                 if ($file->isValid()) {
                     
                     $record = new File;
                     $record->disk = 'local';
-                    $record->path = 'files';
                     $record->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
                     $record->extension = $file->extension();
                     $record->size = $file->getSize();
@@ -72,13 +72,14 @@ class FilesController extends Controller
 
                     $record->save();
 
-                    $file->storeAs($record->real_path,  $record->id.'.'.$file->extension(), 'local');
+                    $file->storeAs($record->path,  $record->id.'.'.$file->extension(), 'local');
 
                 }
+
             }
         }
 
-        return back();
+        return redirect(route('files.index'));
     }
 
     /**
@@ -90,8 +91,8 @@ class FilesController extends Controller
     public function show($id)
     {
         $file = File::findOrFail($id);
-        
-        return response()->file(storage_path('app/'.$file->real_path.'/'.$file->id.'.'.$file->extension));
+
+        return Storage::disk('local')->get($file->path.'/'.$file->id.'.'.$file->extension);
     }
 
     /**

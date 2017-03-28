@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<a href="{{ Route::has('files.index') ? route('files.index') : '#' }}" class="btn btn-lg btn-primary btn-block">
+				<i class="fa fa-home" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>
+
 <form action="{{ Route::has('files.store') ? route('files.store') : '#' }}" method="POST" enctype="multipart/form-data">
 	{{ method_field('POST') }}
 	{{ csrf_field() }}
@@ -22,4 +32,8 @@
 	</div>
 
 </form>
+@append
+
+@section('styles')
+<link href="{{ asset('/vendor/yk/laravel-files/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 @append

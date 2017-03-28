@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<a href="{{ Route::has('files.create') ? route('files.create') : '#' }}" class="btn btn-lg btn-success btn-block">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>
+
 <table class="table table-striped table-hover">
 	<body>
 	@foreach($files as $file)
@@ -27,4 +37,8 @@
 @if( method_exists($files, 'links') )
 	{{ $files->links() }}
 @endif
+@append
+
+@section('styles')
+<link href="{{ asset('/vendor/yk/laravel-files/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
 @append

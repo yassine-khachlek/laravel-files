@@ -25,10 +25,6 @@ class CreateFilesTable extends Migration
                 $table->string('disk', 191)->default('local');
             }
 
-            if (!Schema::hasColumn($table->getTable(), 'path')) {
-                $table->text('path')->nullable();
-            }
-
             if (!Schema::hasColumn($table->getTable(), 'name')) {
                 $table->string('name', 191);
             }

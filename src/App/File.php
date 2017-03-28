@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-	protected $appends = ['real_path', 'url'];
+	protected $appends = ['path', 'url'];
 
-    public function getRealPathAttribute()
+    public function getPathAttribute()
     {
-    	$path = $this->path;
+    	$path = 'files';
 
         for ($i=18; $i > 3; $i-=3) { 
             $path .= '/'.(floor($this->id/pow(10, $i))+1);
