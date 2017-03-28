@@ -3,9 +3,12 @@
 namespace Yk\LaravelFiles\App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class File extends Model
 {
+    use SoftDeletes;
+
 	protected $appends = ['path', 'link', 'download_link'];
 
     public function getPathAttribute()

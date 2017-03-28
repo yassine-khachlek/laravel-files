@@ -5,7 +5,7 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<a href="{{ Route::has('files.create') ? route('files.create') : '#' }}" class="btn btn-lg btn-success btn-block">
-				<i class="fa fa-plus" aria-hidden="true"></i>
+				<i class="fa fa-upload" aria-hidden="true"></i>
 			</a>
 		</div>
 	</div>
@@ -30,6 +30,14 @@
 				{{ round($file->size / pow(10, 6), 2) }} MB
 			</td>
 			<td>
+				<form action="{{ Route::has('files.destroy') ? route('files.destroy', ['id' => $file->id]) : '#' }}" method="POST" class="form-inline pull-right">
+					{{ method_field('DELETE') }}
+					{{ csrf_field() }}
+					<button type="submit" class="btn btn-lg btn-primary">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</form>
+
 				<a href="{{ $file->link }}" target="_blank" class="btn btn-lg btn-primary pull-right">
 					<i class="fa fa-external-link" aria-hidden="true"></i>
 				</a>
@@ -53,6 +61,9 @@
 
 <style type="text/css">
 	.table :last-child > a {
+		margin-left: 8px;
+	}
+	.table :last-child > form {
 		margin-left: 8px;
 	}
 </style>

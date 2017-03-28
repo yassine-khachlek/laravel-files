@@ -13,11 +13,16 @@
 
 Route::group(['prefix' => 'files', 'as' => 'files.'], function () {
 
-	Route::resource('/', 'FilesController', ['except' => [
-    	'show'
-	]]);
+	Route::get('/', 'FilesController@index')->name('index');
+
+	Route::get('/create', 'FilesController@create')->name('create');
+
+	Route::post('/', 'FilesController@store')->name('store');
 
 	Route::get('/{id}/{slug?}', 'FilesController@show')->name('show');
+
 	Route::get('/{id}/download/{slug?}', 'FilesController@download')->name('download');
+
+	Route::delete('/{id}', 'FilesController@destroy')->name('destroy');
 
 });

@@ -5,7 +5,7 @@
 	<div class="col-md-12">
 		<div class="form-group">
 			<a href="{{ Route::has('files.index') ? route('files.index') : '#' }}" class="btn btn-lg btn-primary btn-block">
-				<i class="fa fa-home" aria-hidden="true"></i>
+				<i class="fa fa-list" aria-hidden="true"></i>
 			</a>
 		</div>
 	</div>

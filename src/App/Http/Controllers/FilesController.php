@@ -144,6 +144,10 @@ class FilesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $file = File::findOrFail($id);
+
+        $file->delete();
+
+        return redirect(route('files.index'));
     }
 }
