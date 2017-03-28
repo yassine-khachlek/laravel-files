@@ -33,7 +33,7 @@
 				<form action="{{ Route::has('files.destroy') ? route('files.destroy', ['id' => $file->id]) : '#' }}" method="POST" class="form-inline pull-right">
 					{{ method_field('DELETE') }}
 					{{ csrf_field() }}
-					<button type="submit" class="btn btn-lg btn-primary">
+					<button type="submit" class="btn btn-lg btn-danger">
 						<i class="fa fa-trash" aria-hidden="true"></i>
 					</button>
 				</form>

@@ -25,10 +25,21 @@
         @endif
 	</div>
 
-	<div class="form-group">
-		<button type="submit" class="btn btn-danger btn-block btn-lg">
-			UPLOAD
-		</button>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group">
+				<a href="{{ Route::has('files.index') ? route('files.index') : '#' }}" class="btn btn-lg btn-block btn-default">
+					CANCEL
+				</a>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<button type="submit" class="btn btn-danger btn-block btn-lg">
+					UPLOAD
+				</button>
+			</div>
+		</div>
 	</div>
 
 </form>
