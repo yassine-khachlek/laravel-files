@@ -73,7 +73,7 @@ class FilesController extends Controller
                     $record = new File;
                     $record->disk = 'local';
                     $record->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                    $record->extension = $file->extension();
+                    $record->extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
                     $record->size = $file->getSize();
                     $record->mime_type = $file->getMimeType();
 
@@ -96,7 +96,7 @@ class FilesController extends Controller
                 $record = new File;
                 $record->disk = 'local';
                 $record->name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $record->extension = $file->extension();
+                $record->extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
                 $record->size = $file->getSize();
                 $record->mime_type = $file->getMimeType();
 
